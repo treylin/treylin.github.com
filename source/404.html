@@ -1,0 +1,18 @@
+--- 
+layout: page
+title: 你要访问的网页不存在！
+footer: false
+---
+<h3>看看下面的内容，也许你感兴趣 :-)</h3>
+<div id="blog-archives">
+  {% for post in site.posts reverse %}
+  {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
+  {% unless year == this_year %}
+  {% assign year = this_year %}
+  <h2>{{ year }}</h2>
+    {% endunless %}
+  <article>
+    {% include archive_post.html %}
+  </article>
+  {% endfor %}
+</div> 

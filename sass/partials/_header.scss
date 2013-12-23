@@ -1,18 +1,23 @@
-body > header {
-  background: $header-bg;
-  h1 {
-    display: inline-block;
-    margin: 0;
-    a, a:visited, a:hover {
-      color: $title_color;
-      text-decoration: none;
+body > header[role="banner"] {
+  background: $header-bg image-url('header_bg.png') top left;
+  border-top: solid 5px #1f2323;
+  hgroup {
+    h1 {
+      font-family: 'IM Fell English', serif;
+      font-size: 2.2em;
+      margin-bottom: 0;
+      a, a:visited, a:hover {
+        color: $title_color;
+        text-decoration: none;
+      }
     }
-  }
-  h2 {
-    margin: .2em 0 0;
-    @extend .sans;
-    font-size: 1em;
-    color: $subtitle-color;
-    font-weight: normal;
+    h2 {
+      padding-top: 0.6em;
+      font-family: 'IM Fell English', serif;
+      @extend .sans;
+      font-size: 1.0em;
+      color: $subtitle-color;
+      font-weight: normal;
+    }
   }
 }
