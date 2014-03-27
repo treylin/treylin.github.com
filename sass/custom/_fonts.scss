@@ -2,9 +2,16 @@
 // To give it a try, uncomment some of the lines below rebuild your blog, and see how it works. your sites's.
 // If you love to use Web Fonts, you also need to add some lines to source/_includes/custom/head.html
 
+$sans: 'Lucida Grande', Helvetica, Arial;
+$serif: 'Lucida Grande', Helvetica, Arial;
+$mono: Monaco, Consolas, 'Ubuntu Mono', Courier, monospace;
+$heading-font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+$header-title-font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+$header-subtitle-font-family: 'Lucida Grande', Helvetica, Arial, sans-serif;
+
 //$sans: Open Sans;
 //$serif: Open Sans;
-//$mono: Monaco, Consolas, Ubuntu Mono, Courier, monospace;
-//$heading-font-family: "PT Serif", "STHeiti","SimHei", "Verdana", sans-serif;
+//$mono: Monaco, Consolas, Ubuntu Mono, Courier;
+//$heading-font-family: "STHeiti","SimHei","Helvetica Neue", Arial, sans-serif;
 //$header-title-font-family: "Futura", sans-serif;
 //$header-subtitle-font-family: "Futura", sans-serif;

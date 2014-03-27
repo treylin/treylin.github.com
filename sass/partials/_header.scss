@@ -3,8 +3,8 @@ body > header[role="banner"] {
   border-top: solid 5px #1f2323;
   hgroup {
     h1 {
-      font-family: 'IM Fell English', serif;
-      font-size: 2.2em;
+      font-family: 'Volkhov', serif;
+      font-size: 2.0em;
       margin-bottom: 0;
       a, a:visited, a:hover {
         color: $title_color;
@@ -13,7 +13,7 @@ body > header[role="banner"] {
     }
     h2 {
       padding-top: 0.6em;
-      font-family: 'IM Fell English', serif;
+      font-family: 'Volkhov', serif;
       @extend .sans;
       font-size: 1.0em;
       color: $subtitle-color;

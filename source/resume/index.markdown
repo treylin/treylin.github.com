@@ -5,6 +5,7 @@ date: 2012-10-25 01:06
 comments: true
 sharing: true
 footer: true
+published: false
 ---
 
 ####__个人概况__  
