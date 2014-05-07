@@ -3,7 +3,7 @@ source "http://rubygems.org"
 group :development do
   gem 'rake', '~> 10.3.1'
   gem 'rack', '~> 1.4.1'
-  gem 'jekyll', '~> 0.11.2'
+  gem 'jekyll', '~> 2.0.2'
   gem 'rdiscount', '~> 1.6.8'
   gem 'pygments.rb', '~> 0.5.4'
   gem 'RedCloth', '~> 4.2.9'
@@ -12,7 +12,7 @@ group :development do
   gem 'rubypants', '~> 0.2.0'
   gem 'rb-fsevent', '~> 0.9'
   gem 'stringex', '~> 1.4.0'
-  gem 'liquid', '~> 2.3.0'
+  gem 'liquid', '~> 2.5.5'
 end
 
 gem 'sinatra', '~> 1.3.2'
