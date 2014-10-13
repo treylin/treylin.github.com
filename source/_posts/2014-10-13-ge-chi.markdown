@@ -1,0 +1,23 @@
+---
+layout: post
+title: "最近"
+date: 2014-10-13 21:12:31 +0800
+comments: true
+categories: Life
+---
+
+最近的一段时间（一两个月），大幅度减少了耗费在各类社交网络、社区、论坛上的时间（Twitter 和 Instagram 除外），微信也一度处于登出状态，感觉良好，并没有真正损失什么，相反，最近的收获挺多。  
+
+第三季度前半段因为工作的忙碌，以及自己的懒惰，阅读计划丢下不少。最近这段，在看 [《瓦尔登湖》](http://book.douban.com/subject/24851615/)，我有意锻炼自己的英文阅读能力，所以中文译本和英文原文都看。中文是看的纸书，英文是端着 iPad 看的，进度慢一些。这里要谢谢苹果家的 iBook Store，上面有不少经典名著，大部分还是免费的。对梭罗当时激进的思想，印象深刻。即使放到今天来看，也似乎是一记记有力的耳光。“我相信在今天的中国，需要梭罗来唤醒的梦游者有很多。” 中文译本的翻译者李继宏在导读中写道。我对第一章节中的一句话印象深刻：  
+
+>人们交口称赞和认为成功的生活，无非是生活的一种而已。我们为什么要夸耀一种，而牺牲其他各种呢？  
+The life which men praise and regard as successful is but one kind. Why should we exaggerate any one kind at the expense of the others?  
+
+[《二十位人性见证者:当代摄影大师》](http://book.douban.com/subject/11622273/)，摄影相关书籍，文字虽然很好，但我有点辜负了作者。文字没有认真看，主要看照片。  
+
+还有[《江城》](http://book.douban.com/subject/7060185/)，作者是 96 年来到中国涪陵的「美中友好志愿者」，此书记录的是他在涪陵两年间的支教生活。从他踏上中国大地后就开始的，没有停止过的各种疑惑和好奇中，能反观出中国的很多很多问题。我惊讶于这本书居然能在大陆出版，而且还经过了多次再版。值得推荐的一本书，我看的是 Kindle 版的，中国亚马逊商店有售。  
+
+技术方面，研究了关于 Objective-C runtime 的知识，主要是跟 Method Swizzling 相关的方面。国内讲述 Method Swizzling 原理的中文文章几乎没有，英文看到比较好的是 Mattt Thompson 在 NSHipster 上写的这篇 [Method Swizzling ](http://nshipster.com/method-swizzling/)，以及这篇 [The Right Way to Swizzle in Objective-C](http://blog.newrelic.com/2014/04/16/right-way-to-swizzle/)。我把后面这篇翻译了一下，暂存在了 Evernote 里，后面有时间就放上来吧。为了研究透彻，我还找了开源操作系统 GNUstep[（官网）](http://wwwmain.gnustep.org/resources/downloads.php?site=ftp%3A%2F%2Fftp.gnustep.org%2Fpub%2Fgnustep%2F) 里 **method_exchangeImplementations** 相关的源码来阅读。就以上的一些研究成果，在组内做了一次技术分享。国庆前做了另一次分享，是关于 git 的一些高级用法。  
+
+闲暇时基本就是拿着相机到处按快门，好记性不如烂照片。大概如此，细节不表，都在照片里。后面大概还是维持这种状态，只是新项目在上周已经启动，接下来的一段时间应该会忙。:-)
+
