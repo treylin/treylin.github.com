@@ -17,7 +17,7 @@ The life which men praise and regard as successful is but one kind. Why should w
 
 还有[《江城》](http://book.douban.com/subject/7060185/)，作者是 96 年来到中国涪陵的「美中友好志愿者」，此书记录的是他在涪陵两年间的支教生活。从他踏上中国大地后就开始的，没有停止过的各种疑惑和好奇中，能反观出中国的很多很多问题。我惊讶于这本书居然能在大陆出版，而且还经过了多次再版。值得推荐的一本书，我看的是 Kindle 版的，中国亚马逊商店有售。  
 
-技术方面，研究了关于 Objective-C runtime 的知识，主要是跟 Method Swizzling 相关的方面。国内讲述 Method Swizzling 原理的中文文章几乎没有，英文看到比较好的是 Mattt Thompson 在 NSHipster 上写的这篇 [Method Swizzling ](http://nshipster.com/method-swizzling/)，以及这篇 [The Right Way to Swizzle in Objective-C](http://blog.newrelic.com/2014/04/16/right-way-to-swizzle/)。我把后面这篇翻译了一下，暂存在了 Evernote 里，后面有时间就放上来吧。为了研究透彻，我还找了开源操作系统 GNUstep[（官网）](http://wwwmain.gnustep.org/resources/downloads.php?site=ftp%3A%2F%2Fftp.gnustep.org%2Fpub%2Fgnustep%2F) 里 **method_exchangeImplementations** 相关的源码来阅读。就以上的一些研究成果，在组内做了一次技术分享。国庆前做了另一次分享，是关于 git 的一些高级用法。  
+技术方面，研究了关于 Objective-C runtime 的知识，主要是跟 `Method Swizzling` 相关的方面。国内讲述 `Method Swizzling` 原理的中文文章几乎没有，英文看到比较好的是 Mattt Thompson 在 NSHipster 上写的这篇 [Method Swizzling ](http://nshipster.com/method-swizzling/)，以及这篇 [The Right Way to Swizzle in Objective-C](http://blog.newrelic.com/2014/04/16/right-way-to-swizzle/)。我把后面这篇翻译了一下，暂存在了 Evernote 里，后面有时间就放上来吧。为了研究透彻，我还找了开源操作系统 GNUstep[（官网）](http://wwwmain.gnustep.org/resources/downloads.php?site=ftp%3A%2F%2Fftp.gnustep.org%2Fpub%2Fgnustep%2F) 里 `method_exchangeImplementations` 相关的源码来阅读。就以上的一些研究成果，在组内做了一次技术分享。国庆前做了另一次分享，是关于 git 的一些高级用法。  
 
-闲暇时基本就是拿着相机到处按快门，好记性不如烂照片。大概如此，细节不表，都在照片里。后面大概还是维持这种状态，只是新项目在上周已经启动，接下来的一段时间应该会忙。:-)
+闲暇时基本就是拿着相机到处按快门，好记性不如烂照片。大概如此，细节不表，都在照片里。后面大概还是维持这种状态，只是新项目在上周已经启动，接下来的一段时间应该会很忙。:-)
 
