@@ -1,0 +1,734 @@
+<!doctype html>
+<html class="theme-next  theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="使用 @property 配合 @synthesize 可以让编译器自动实现 getter/setter 方法，使用的时候也很方便，可以直接使用 “对象.属性” 的方法调用；如果我们想要 “对象.方法” 的方式来调用一个方法并获取到方法的返回值，那就需要使用 @property 配合 @dynamic 了。  
+使用 @dynamic 关键字是告诉编译器由我们自己来实现访问方法。如果使用的是 @s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C 的一些关键字">
+<meta property="og:url" content="http://treylin.me/2013/02/20/about-property-synthesize-nonatomic/index.html">
+<meta property="og:site_name" content="陌上">
+<meta property="og:description" content="使用 @property 配合 @synthesize 可以让编译器自动实现 getter/setter 方法，使用的时候也很方便，可以直接使用 “对象.属性” 的方法调用；如果我们想要 “对象.方法” 的方式来调用一个方法并获取到方法的返回值，那就需要使用 @property 配合 @dynamic 了。  
+使用 @dynamic 关键字是告诉编译器由我们自己来实现访问方法。如果使用的是 @s">
+<meta property="og:updated_time" content="2013-11-14T06:27:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Objective-C 的一些关键字">
+<meta name="twitter:description" content="使用 @property 配合 @synthesize 可以让编译器自动实现 getter/setter 方法，使用的时候也很方便，可以直接使用 “对象.属性” 的方法调用；如果我们想要 “对象.方法” 的方式来调用一个方法并获取到方法的返回值，那就需要使用 @property 配合 @dynamic 了。  
+使用 @dynamic 关键字是告诉编译器由我们自己来实现访问方法。如果使用的是 @s">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Objective-C 的一些关键字 // 陌上 </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-38846856-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">陌上</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Objective-C 的一些关键字
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2013-02-20T15:16:00+08:00" content="2013-02-20">
+            2013-02-20
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分类于
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2013/02/20/about-property-synthesize-nonatomic/#comments" itemprop="discussionUrl">
+              <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2013/02/20/about-property-synthesize-nonatomic/" itemprop="commentsCount"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>使用 @property 配合 @synthesize 可以让编译器自动实现 getter/setter 方法，使用的时候也很方便，可以直接使用 “对象.属性” 的方法调用；如果我们想要 “对象.方法” 的方式来调用一个方法并获取到方法的返回值，那就需要使用 @property 配合 @dynamic 了。  </p>
+<p>使用 @dynamic 关键字是告诉编译器由我们自己来实现访问方法。如果使用的是 @synthesize，那么这个工作编译器就会帮你实现了。  </p>
+<p>readonly 此标记说明属性是只读的，默认的标记是读写，如果你指定了只读，在 @implementation 中只需要一个读取器。或者如果你使用 @synthesize 关键字，也是有读取器方法被解析。而且如果你试图使用点操作符为属性赋值，你将得到一个编译错误。  </p>
+<p>readwrite 此标记说明属性会被当成读写的，这也是默认属性。设置器和读取器都需要在 @implementation 中实现。如果使用 @synthesize 关键字，读取器和设置器都会被解析。</p>
+<p>nonatomic：非原子性访问，对属性赋值的时候不加锁，多线程并发访问会提高性能。如果不加此属性，则默认是两个访问方法都为原子型事务访问。  </p>
+<p>atomic 和 nonatomic 用来决定编译器生成的 getter 和 setter 是否为原子操作。<br><a id="more"></a><br>atomic :<br>设置成员变量的 @property 属性时，默认为 atomic，提供多线程安全。<br>在多线程环境下，原子操作是必要的，否则有可能引起错误的结果。加了 atomic，setter 函数会变成下面这样：  </p>
+<pre><code><span class="comment"><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;lock&#125;</span><br><span class="line">  <span class="keyword">if</span> (property != newValue) &#123; </span><br><span class="line">       [property release]; </span><br><span class="line">       property = [newValue retain]; </span><br><span class="line">   &#125;</span><br><span class="line">&#123;unlock&#125;</span><br></pre></td></tr></table></figure></span>
+</code></pre><p>nonatomic :<br>禁止多线程，变量保护，提高性能。</p>
+<p>atomic 是 ObjC 使用的一种线程保护技术，基本上来讲，是防止在写未完成的时候被另外一个线程读取，造成数据错误。而这种机制是耗费系统资源的，所以在 iPhone 这种小型设备上，如果没有使用多线程间的通讯编程，那么 nonatomic 是一个非常好的选择。  </p>
+<p>指出访问器不是原子操作，而默认地，访问器是原子操作。这也就是说，在多线程环境下，解析的访问器提供一个对属性的安全访问，从获取器得到的返回值或者通过设置器设置的值可以一次完成，即便是别的线程也正在对其进行访问。如果你不指定  nonatomic ，在自己管理内存的环境中，解析的访问器保留并自动释放返回的值，如果指定了 nonatomic ，那么访问器只是简单地返回这个值。</p>
+<p>assign :<br>简单赋值，不更改索引计数。<br>对基础数据类型 （例如 NSInteger，CGFloat）和 C 数据类型（int, float, double, char 等）适用简单数据类型</p>
+<p>此标记说明设置器直接进行赋值，这也是默认值。在使用垃圾收集的应用程序中，如果你要一个属性使用assign，且这个类符合NSCopying 协议，你就要明确指出这个标记，而不是简单地使用默认值，否则的话，你将得到一个编译警告。这再次向编译器说明你确实需要赋值，即使它是可拷贝的。</p>
+<p>copy :<br>建立一个索引计数为1的对象，然后释放旧对象。<br>对 NSString 它指出，在赋值时使用传入值的一份拷贝。拷贝工作由 copy 方法执行，此属性只对那些实行了 NSCopying 协议的对象类型有效。更深入的讨论，请参<br>考“复制”部分。</p>
+<p>retain :<br>释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为 1。<br>对其他 NSObject 和其子类<br>对参数进行 release 旧值，再 retain 新值<br>指定 retain 会在赋值时唤醒传入值的 retain 消息。此属性只能用于 Objective-C 对象类型，而不能用于 Core Foundation 对象。(原因很明显，retain 会增加对象的引用计数，而基本数据类型或者 Core Foundation 对象都没有引用计数)。<br>注意: 把对象添加到数组中时，引用计数将增加对象的引用次数 +1。</p>
+<p>retain 的实际语法为 :</p>
+<pre><code><span class="comment"><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)newName</span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">if</span> (name != newName) &#123; </span><br><span class="line">        [name release]; </span><br><span class="line">        name = [newName retain]; </span><br><span class="line">    <span class="comment">// name’s retain count has been bumped up by 1 </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
+</code></pre><p>copy 与 retain :<br>copy 其实是建立了一个相同的对象，而 retain 不是 :<br>比如一个 NSString 对象，地址为 0×1111，内容为 @&quot;STR&quot;<br>copy 到另外一个 NSString 之后，地址为 0×2222，内容相同，新的对象 retain 为 1，旧有对象没有变化；<br>retain 到另外一个 NSString 之后，地址相同（建立一个指针，指针拷贝），内容当然相同，这个对象的 retain 值 +1；<br>也就是说，retain 是指针拷贝，copy 是内容拷贝。</p>
+<p>retain 的 set 方法应该是浅复制，copy 的 set 方法应该是深复制了<br>copy 另一个用法：<br>copy 是内容的拷贝，对于像 NSString，的确是这样.<br>但是, 如果是 copy 的是一个 NSArray 呢? 比如,<br>NSArray <em>array = [NSArray arrayWithObjects:@&quot;hello&quot;, @&quot;world&quot;, @&quot;baby&quot;];<br>NSArray </em>array2 = [array copy];<br>这个时候，系统的确是为 array2 开辟了一块内存空间，但是我们要认识到的是，array2 中的每个元素，只是 copy 了指向array中相对应元素的指针。这便是所谓的&quot;浅复制&quot;.</p>
+<p>assign 与 retain：  </p>
+<ol>
+<li>接触过 C，那么假设你用 malloc 分配了一块内存，并且把它的地址赋值给了指针 a，后来你希望指针 b 也共享这块内存，于是你又把 a 赋值给（assign）了 b。此时 a 和 b 指向同一块内存，请问当 a 不再需要这块内存，能否直接释放它？答案是否定的，因为 a 并不知道 b 是否还在使用这块内存，如果 a 释放了，那么 b 在使用这块内存的时候会引起程序 crash 掉。</li>
+<li>了解到 1 中 assign 的问题，那么如何解决？最简单的一个方法就是使用引用计数（reference counting），还是上面的那个例子，我们给那块内存设一个引用计数，当内存被分配并且赋值给 a 时，引用计数是 1。当把 a 赋值给 b 时引用计数增加到 2。这时如果 a 不再使用这块内存，它只需要把引用计数减 1，表明自己不再拥有这块内存。b 不再使用这块内存时也把引用计数减 1。当引用计数变为0的时候，代表该内存不再被任何指针所引用，系统可以把它直接释放掉。</li>
+</ol>
+<p>总结：上面两点其实就是 assign 和 retain 的区别，assign 就是直接赋值，从而可能引起 1 中的问题，当数据为 int, float 等原生类型时，可以使用assign。retain 就如 2 中所述，使用了引用计数，retain 引起引用计数加 1, release 引起引用计数减1，当引用计数为0时，dealloc 函数被调用，内存被回收。</p>
+<pre><code><span class="built_in">NSString</span> *pt = [[<span class="built_in">NSString</span> alloc] initWithString:<span class="string">@"abc"</span>];
+</code></pre><p>上面一段代码会执行以下两个动作</p>
+<ol>
+<li>在堆上分配一段内存用来存储 @&quot;abc&quot;  比如：内存地址为：0X1111 内容为 &quot;abc&quot;。</li>
+<li>在栈上分配一段内存用来存储 pt 比如：地址为：0Xaaaa 内容自然为 0X1111。  </li>
+</ol>
+<p>下面分别看下assign retain copy assign 的情况：  </p>
+<pre><code>NSString *newPt = <span class="string">[pt assing]</span>;  
+</code></pre><p>此时 newPt 和 pt 完全相同 地址都是 0Xaaaa  内容为 0X1111  即 newPt 只是 pt 的别名，对任何一个操作就等于对另一个操作。 因此retainCount 不需要增加。<br>retain 的情况：</p>
+<pre><code>NSString *newPt = <span class="string">[pt retain]</span>;  
+</code></pre><p>此时 newPt 的地址不再为 0Xaaaa，可能为 0Xaabb 但是内容依然为 0X1111。 因此 newPt 和 pt 都可以管理 &quot;abc&quot; 所在的内存。因此 retainCount 需要增加1。<br>copy 的情况：</p>
+<pre><code><span class="built_in">NSString</span> *newPt = [pt <span class="keyword">copy</span>];
+</code></pre><p>此时会在堆上重新开辟一段内存存放 @&quot;abc&quot; 比如 0X1122 内容为 @&quot;abc&quot; 同时会在栈上为 newPt 分配空间。比如地址：0Xaacc 内容为0X1122 因此 retainCount 增加 1 供 newPt 来管理 0X1122 这段内存</p>
+<hr>
+<p>看了这么多也许大家有点晕， 现在进行实际的代码演示：</p>
+<pre><code><span class="constant">@property</span> (nonatomic, <span class="built_in">assign</span>) <span class="built_in">int</span> <span class="built_in">number</span><span class="comment">;</span>
+</code></pre><p>这里定义了一个 int 类型的属性， 那么这个 int 是简单数据类型，本身可以认为就是原子访问，所以用 nonatomic,  不需要进行引用计数，所以用 assign。 适用于所有简单数据类型。  </p>
+<pre><code><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *myString;
+</code></pre><p>这里定义了一个 NSString 类型的属性，不需要原子操作，所以用 nonatomic.<br>为什么需要 copy，而不是 retain 呢！ 因为如果对 myString 赋值原字符串是一个可变的字符串(NSMutableString)对象的话，用retain的话，当原字符串改变的时候你的myString属性也会跟着变掉。我想你不希望看到这个现象。 实际上博主测试， 如果原来的字符串是 NSString 的话，也只是retain一下，并不会copy副本。  </p>
+<pre><code><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, retain) <span class="built_in">UIView</span> *myView;
+</code></pre><p>这里定义了一个 UIView 类型的属性，不需要原子操作，所以用 nonatomic。<br>当对 myView 赋值的时候原来的 UIView 对象 retainCount 会加 1。  </p>
+<pre><code><span class="comment">// 接口文件</span>
+<span class="variable">@interface</span> <span class="attribute">MyClass </span>: NSObject
+<span class="variable">@property</span> (nonatomic, assign) int number;
+<span class="variable">@property</span> (nonatomic, copy) NSString  *myString;
+<span class="variable">@property</span> (nonatomic, retain) UIView *myView;
+<span class="variable">@end</span>  
+
+<span class="comment">// 实现文件</span>
+<span class="variable">@implementation</span> MyClass
+<span class="variable">@synthesize</span> number;
+<span class="variable">@synthesize</span> myString;
+<span class="variable">@synthesize</span> myView;
+<span class="comment">// 释放内存</span>
+<span class="tag">-</span> (void) <span class="tag">dealloc</span>
+{
+    <span class="attr_selector">[myString release]</span>;   <span class="comment">// copy 的属性需要 release;</span>
+    <span class="attr_selector">[myView release]</span>;     <span class="comment">// retain 的属性需要 release;</span>
+    <span class="attr_selector">[super dealloc]</span>;      <span class="comment">// 传回父对象</span>
+}
+<span class="variable">@end</span>
+</code></pre><p>假如你有一段代码创建了一个 MyClass 对象:  </p>
+<pre><code>MyClass *instance  = [MyClass alloc] init];
+
+// <span class="keyword">number</span> 赋值，没什么可说的，简单数据类型就这样
+instance.<span class="keyword">number</span> = <span class="number">1</span>;
+// 创建一个可变字符串
+NSMutableString *<span class="built_in">string</span> = [NSMutableString stringWithStrin<span class="variable">g:</span>@<span class="string">"hello"</span>];
+instance.myString = <span class="built_in">string</span>;                   // 对 myString 赋值
+[<span class="built_in">string</span> appendStrin<span class="variable">g:</span>@<span class="string">" world!"</span>];           // 往 <span class="built_in">string</span> 追加文本 
+NSLog(@”%@”, <span class="built_in">string</span>);                           // 此处 <span class="built_in">string</span> 已经改变，输出为<span class="string">"hello world!"</span>
+NSLog(@”%@”, instance.myString);         // 输出 myString，你会发现此处输出仍然为 <span class="string">"hello"</span> 因为 myString 在 <span class="built_in">string</span> 改变之前已经 <span class="built_in">copy</span> 了一份副本
+UIView *<span class="keyword">view</span> = [[UIView alloc] init];
+NSLog(@”retainCount = %<span class="keyword">d</span>”, <span class="keyword">view</span>.retainCount);
+// 输出 <span class="keyword">view</span> 的引用计数，此时为 <span class="number">1</span>
+instance.myView = <span class="keyword">view</span>;      // 对 myView 属性赋值
+NSLog(@”retainCount = %<span class="keyword">d</span>”, <span class="keyword">view</span>.retainCount);
+// 再次输出 <span class="keyword">view</span> 的引用计数，此时为 <span class="number">2</span>，因为 myView 对 <span class="keyword">view</span> 进行了一次 retain。 
+[<span class="keyword">view</span> release];
+// 此处虽然 <span class="keyword">view</span> 被 release 释放掉了，但 myView 对 <span class="keyword">view</span> 进行了一次 retain，那么 myView 保留的 UIView 的对象指针仍然有效。
+[instance release] ;
+</code></pre></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/03/22/about-uitableview/" rel="prev">UITableView 一点技巧</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/01/29/ni-xiang-yao-de-sheng-huo/" rel="next">It's life.</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+                  <div id="disqus_thread">
+                    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                  </div>
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/1401556?v=3&s=460" alt="Zetao Lin" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Zetao Lin</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://treylin.me/atom.xml" target="_blank">RSS</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/trey_lin" target="_blank">Twitter</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/alongsongfromtt" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.instagram.com/treylin" target="_blank">Instagram</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/alongsong/" target="_blank">Douban</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp;  2012 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="author" itemprop="copyrightHolder">Zetao Lin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'treylinblog';
+      var disqus_identifier = '2013/02/20/about-property-synthesize-nonatomic/';
+      var disqus_title = 'Objective-C 的一些关键字';
+      var disqus_url = 'http://treylin.me/2013/02/20/about-property-synthesize-nonatomic/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/js/motion_fallback.js?v=0.4.4" id="motion.fallback"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>
