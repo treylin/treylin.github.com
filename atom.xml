@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Life is short, play more.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://treylin.me/"/>
-  <updated>2016-11-22T16:20:59.000Z</updated>
+  <updated>2016-11-22T16:36:13.000Z</updated>
   <id>https://treylin.me/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="https://treylin.me/2016/11/23/helping-others/"/>
     <id>https://treylin.me/2016/11/23/helping-others/</id>
     <published>2016-11-22T16:09:50.000Z</published>
-    <updated>2016-11-22T16:20:59.000Z</updated>
+    <updated>2016-11-22T16:36:13.000Z</updated>
     <content type="html"><![CDATA[<p>这雨，说是要持续下到周末。  </p>
 <p>同班车一位孕妇，是同事。到站，车门一开，就往雨里钻了。手挡在头上，一看就是没带雨伞。</p>
 <p>记得是上周五，下车时，我帮她把一个四十公分见方的纸箱搬下车，应该是「双十一」血拼的战果吧。是面容姣好的一姑娘，鹅蛋脸，挺挺的鼻子。她走得很快。雨虽不大，但是下车还要走一段比较长的距离，再过一个红绿灯路口。  </p>
@@ -320,140 +320,13 @@
   </entry>
   
   <entry>
-    <title><![CDATA[UITableView 一点技巧]]></title>
-    <link href="https://treylin.me/2013/03/22/about-uitableview/"/>
-    <id>https://treylin.me/2013/03/22/about-uitableview/</id>
-    <published>2013-03-22T07:28:00.000Z</published>
-    <updated>2013-11-11T07:31:46.000Z</updated>
-    <content type="html"><![CDATA[<p>这是我在网上摘录的一点关于优化 UITableView 的技巧，在这里分享一下。  </p>
-<p>1、每次都看一下有没有能重用的 cell，而不是永远重新新建（这个是 UITableView 的常识）<br>2、Cell 里尽量不要用 UIView 而是全部自己画<br>3、图片载入放到后台进程去进行，滚出可视范围的载入进程要 cancel 掉<br>4、圆角、阴影之类的全部 bitmap 化，或者放到后台 draw 好了再拿来用<br>5、Cell 里要用的数据提前缓存好，不要现用现去读文件<br>6、数据量太大来不及一次读完的做一个 load more cell 出来，尽量避免边滚边读数据，这样就算是双核的 CPU 也难保不会抽。  </p>
-<p>做到以上6条的话，应该就能做出很顺畅的滚动了（现在的 Twitter 官方客户端的原作者写过一篇文章，总结起来也无非就是我说的前3条，可以找来看看）。   </p>
-<p>Path 2.5 的那个滚动说实在的不是很顺畅，图片显示出来的时候都会抽一下，他们还有很大的改进余地。  </p>
-<p>对于3的补充说明：UIImageView 的载入是惰性的说法，是对的。[UIImage imageWithContentOfFile:] 出来的 UIImage 其实并没有真正把文件读入内存，而是要等到用的时候才会去读。但问题就在于 UIImageView 试图去 draw 图片的时候，它读文件、渲染也是在主线程里做的，所以你要读入的图片如果很大（比如 iPad3 上的 @2x 图），不管 iOS 做了何种优化，这一步是一定要卡的。这也就是为什么我说图片要放到后台进程读出来、scale好再用。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>这是我在网上摘录的一点关于优化 UITableView 的技巧，在这里分享一下。  </p>
-<p>1、每次都看一下有没有能重用的 cell，而不是永远重新新建（这个是 UITableView 的常识）<br>2、Cell 里尽量不要用 UIView 而是全部自己画<br>]]>
-    </summary>
-    
-      <category term="iOS" scheme="https://treylin.me/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Objective-C 的一些关键字]]></title>
-    <link href="https://treylin.me/2013/02/20/about-property-synthesize-nonatomic/"/>
-    <id>https://treylin.me/2013/02/20/about-property-synthesize-nonatomic/</id>
-    <published>2013-02-20T07:16:00.000Z</published>
-    <updated>2013-11-14T06:27:57.000Z</updated>
-    <content type="html"><![CDATA[<p>使用 @property 配合 @synthesize 可以让编译器自动实现 getter/setter 方法，使用的时候也很方便，可以直接使用 “对象.属性” 的方法调用；如果我们想要 “对象.方法” 的方式来调用一个方法并获取到方法的返回值，那就需要使用 @property 配合 @dynamic 了。  </p>
-<p>使用 @dynamic 关键字是告诉编译器由我们自己来实现访问方法。如果使用的是 @synthesize，那么这个工作编译器就会帮你实现了。  </p>
-<p>readonly 此标记说明属性是只读的，默认的标记是读写，如果你指定了只读，在 @implementation 中只需要一个读取器。或者如果你使用 @synthesize 关键字，也是有读取器方法被解析。而且如果你试图使用点操作符为属性赋值，你将得到一个编译错误。  </p>
-<p>readwrite 此标记说明属性会被当成读写的，这也是默认属性。设置器和读取器都需要在 @implementation 中实现。如果使用 @synthesize 关键字，读取器和设置器都会被解析。</p>
-<p>nonatomic：非原子性访问，对属性赋值的时候不加锁，多线程并发访问会提高性能。如果不加此属性，则默认是两个访问方法都为原子型事务访问。  </p>
-<p>atomic 和 nonatomic 用来决定编译器生成的 getter 和 setter 是否为原子操作。<br><a id="more"></a><br>atomic :<br>设置成员变量的 @property 属性时，默认为 atomic，提供多线程安全。<br>在多线程环境下，原子操作是必要的，否则有可能引起错误的结果。加了 atomic，setter 函数会变成下面这样：  </p>
-<pre><code><span class="comment"><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;lock&#125;</span><br><span class="line">  <span class="keyword">if</span> (property != newValue) &#123; </span><br><span class="line">       [property release]; </span><br><span class="line">       property = [newValue retain]; </span><br><span class="line">   &#125;</span><br><span class="line">&#123;unlock&#125;</span><br></pre></td></tr></table></figure></span>
-</code></pre><p>nonatomic :<br>禁止多线程，变量保护，提高性能。</p>
-<p>atomic 是 ObjC 使用的一种线程保护技术，基本上来讲，是防止在写未完成的时候被另外一个线程读取，造成数据错误。而这种机制是耗费系统资源的，所以在 iPhone 这种小型设备上，如果没有使用多线程间的通讯编程，那么 nonatomic 是一个非常好的选择。  </p>
-<p>指出访问器不是原子操作，而默认地，访问器是原子操作。这也就是说，在多线程环境下，解析的访问器提供一个对属性的安全访问，从获取器得到的返回值或者通过设置器设置的值可以一次完成，即便是别的线程也正在对其进行访问。如果你不指定  nonatomic ，在自己管理内存的环境中，解析的访问器保留并自动释放返回的值，如果指定了 nonatomic ，那么访问器只是简单地返回这个值。</p>
-<p>assign :<br>简单赋值，不更改索引计数。<br>对基础数据类型 （例如 NSInteger，CGFloat）和 C 数据类型（int, float, double, char 等）适用简单数据类型</p>
-<p>此标记说明设置器直接进行赋值，这也是默认值。在使用垃圾收集的应用程序中，如果你要一个属性使用assign，且这个类符合NSCopying 协议，你就要明确指出这个标记，而不是简单地使用默认值，否则的话，你将得到一个编译警告。这再次向编译器说明你确实需要赋值，即使它是可拷贝的。</p>
-<p>copy :<br>建立一个索引计数为1的对象，然后释放旧对象。<br>对 NSString 它指出，在赋值时使用传入值的一份拷贝。拷贝工作由 copy 方法执行，此属性只对那些实行了 NSCopying 协议的对象类型有效。更深入的讨论，请参<br>考“复制”部分。</p>
-<p>retain :<br>释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为 1。<br>对其他 NSObject 和其子类<br>对参数进行 release 旧值，再 retain 新值<br>指定 retain 会在赋值时唤醒传入值的 retain 消息。此属性只能用于 Objective-C 对象类型，而不能用于 Core Foundation 对象。(原因很明显，retain 会增加对象的引用计数，而基本数据类型或者 Core Foundation 对象都没有引用计数)。<br>注意: 把对象添加到数组中时，引用计数将增加对象的引用次数 +1。</p>
-<p>retain 的实际语法为 :</p>
-<pre><code><span class="comment"><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)newName</span><br><span class="line">&#123; </span><br><span class="line">    <span class="keyword">if</span> (name != newName) &#123; </span><br><span class="line">        [name release]; </span><br><span class="line">        name = [newName retain]; </span><br><span class="line">    <span class="comment">// name’s retain count has been bumped up by 1 </span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span>
-</code></pre><p>copy 与 retain :<br>copy 其实是建立了一个相同的对象，而 retain 不是 :<br>比如一个 NSString 对象，地址为 0×1111，内容为 @&quot;STR&quot;<br>copy 到另外一个 NSString 之后，地址为 0×2222，内容相同，新的对象 retain 为 1，旧有对象没有变化；<br>retain 到另外一个 NSString 之后，地址相同（建立一个指针，指针拷贝），内容当然相同，这个对象的 retain 值 +1；<br>也就是说，retain 是指针拷贝，copy 是内容拷贝。</p>
-<p>retain 的 set 方法应该是浅复制，copy 的 set 方法应该是深复制了<br>copy 另一个用法：<br>copy 是内容的拷贝，对于像 NSString，的确是这样.<br>但是, 如果是 copy 的是一个 NSArray 呢? 比如,<br>NSArray <em>array = [NSArray arrayWithObjects:@&quot;hello&quot;, @&quot;world&quot;, @&quot;baby&quot;];<br>NSArray </em>array2 = [array copy];<br>这个时候，系统的确是为 array2 开辟了一块内存空间，但是我们要认识到的是，array2 中的每个元素，只是 copy 了指向array中相对应元素的指针。这便是所谓的&quot;浅复制&quot;.</p>
-<p>assign 与 retain：  </p>
-<ol>
-<li>接触过 C，那么假设你用 malloc 分配了一块内存，并且把它的地址赋值给了指针 a，后来你希望指针 b 也共享这块内存，于是你又把 a 赋值给（assign）了 b。此时 a 和 b 指向同一块内存，请问当 a 不再需要这块内存，能否直接释放它？答案是否定的，因为 a 并不知道 b 是否还在使用这块内存，如果 a 释放了，那么 b 在使用这块内存的时候会引起程序 crash 掉。</li>
-<li>了解到 1 中 assign 的问题，那么如何解决？最简单的一个方法就是使用引用计数（reference counting），还是上面的那个例子，我们给那块内存设一个引用计数，当内存被分配并且赋值给 a 时，引用计数是 1。当把 a 赋值给 b 时引用计数增加到 2。这时如果 a 不再使用这块内存，它只需要把引用计数减 1，表明自己不再拥有这块内存。b 不再使用这块内存时也把引用计数减 1。当引用计数变为0的时候，代表该内存不再被任何指针所引用，系统可以把它直接释放掉。</li>
-</ol>
-<p>总结：上面两点其实就是 assign 和 retain 的区别，assign 就是直接赋值，从而可能引起 1 中的问题，当数据为 int, float 等原生类型时，可以使用assign。retain 就如 2 中所述，使用了引用计数，retain 引起引用计数加 1, release 引起引用计数减1，当引用计数为0时，dealloc 函数被调用，内存被回收。</p>
-<pre><code><span class="built_in">NSString</span> *pt = [[<span class="built_in">NSString</span> alloc] initWithString:<span class="string">@"abc"</span>];
-</code></pre><p>上面一段代码会执行以下两个动作</p>
-<ol>
-<li>在堆上分配一段内存用来存储 @&quot;abc&quot;  比如：内存地址为：0X1111 内容为 &quot;abc&quot;。</li>
-<li>在栈上分配一段内存用来存储 pt 比如：地址为：0Xaaaa 内容自然为 0X1111。  </li>
-</ol>
-<p>下面分别看下assign retain copy assign 的情况：  </p>
-<pre><code>NSString *newPt = <span class="string">[pt assing]</span>;  
-</code></pre><p>此时 newPt 和 pt 完全相同 地址都是 0Xaaaa  内容为 0X1111  即 newPt 只是 pt 的别名，对任何一个操作就等于对另一个操作。 因此retainCount 不需要增加。<br>retain 的情况：</p>
-<pre><code>NSString *newPt = <span class="string">[pt retain]</span>;  
-</code></pre><p>此时 newPt 的地址不再为 0Xaaaa，可能为 0Xaabb 但是内容依然为 0X1111。 因此 newPt 和 pt 都可以管理 &quot;abc&quot; 所在的内存。因此 retainCount 需要增加1。<br>copy 的情况：</p>
-<pre><code><span class="built_in">NSString</span> *newPt = [pt <span class="keyword">copy</span>];
-</code></pre><p>此时会在堆上重新开辟一段内存存放 @&quot;abc&quot; 比如 0X1122 内容为 @&quot;abc&quot; 同时会在栈上为 newPt 分配空间。比如地址：0Xaacc 内容为0X1122 因此 retainCount 增加 1 供 newPt 来管理 0X1122 这段内存</p>
-<hr>
-<p>看了这么多也许大家有点晕， 现在进行实际的代码演示：</p>
-<pre><code><span class="constant">@property</span> (nonatomic, <span class="built_in">assign</span>) <span class="built_in">int</span> <span class="built_in">number</span><span class="comment">;</span>
-</code></pre><p>这里定义了一个 int 类型的属性， 那么这个 int 是简单数据类型，本身可以认为就是原子访问，所以用 nonatomic,  不需要进行引用计数，所以用 assign。 适用于所有简单数据类型。  </p>
-<pre><code><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *myString;
-</code></pre><p>这里定义了一个 NSString 类型的属性，不需要原子操作，所以用 nonatomic.<br>为什么需要 copy，而不是 retain 呢！ 因为如果对 myString 赋值原字符串是一个可变的字符串(NSMutableString)对象的话，用retain的话，当原字符串改变的时候你的myString属性也会跟着变掉。我想你不希望看到这个现象。 实际上博主测试， 如果原来的字符串是 NSString 的话，也只是retain一下，并不会copy副本。  </p>
-<pre><code><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, retain) <span class="built_in">UIView</span> *myView;
-</code></pre><p>这里定义了一个 UIView 类型的属性，不需要原子操作，所以用 nonatomic。<br>当对 myView 赋值的时候原来的 UIView 对象 retainCount 会加 1。  </p>
-<pre><code><span class="comment">// 接口文件</span>
-<span class="variable">@interface</span> <span class="attribute">MyClass </span>: NSObject
-<span class="variable">@property</span> (nonatomic, assign) int number;
-<span class="variable">@property</span> (nonatomic, copy) NSString  *myString;
-<span class="variable">@property</span> (nonatomic, retain) UIView *myView;
-<span class="variable">@end</span>  
-
-<span class="comment">// 实现文件</span>
-<span class="variable">@implementation</span> MyClass
-<span class="variable">@synthesize</span> number;
-<span class="variable">@synthesize</span> myString;
-<span class="variable">@synthesize</span> myView;
-<span class="comment">// 释放内存</span>
-<span class="tag">-</span> (void) <span class="tag">dealloc</span>
-{
-    <span class="attr_selector">[myString release]</span>;   <span class="comment">// copy 的属性需要 release;</span>
-    <span class="attr_selector">[myView release]</span>;     <span class="comment">// retain 的属性需要 release;</span>
-    <span class="attr_selector">[super dealloc]</span>;      <span class="comment">// 传回父对象</span>
-}
-<span class="variable">@end</span>
-</code></pre><p>假如你有一段代码创建了一个 MyClass 对象:  </p>
-<pre><code>MyClass *instance  = [MyClass alloc] init];
-
-// <span class="keyword">number</span> 赋值，没什么可说的，简单数据类型就这样
-instance.<span class="keyword">number</span> = <span class="number">1</span>;
-// 创建一个可变字符串
-NSMutableString *<span class="built_in">string</span> = [NSMutableString stringWithStrin<span class="variable">g:</span>@<span class="string">"hello"</span>];
-instance.myString = <span class="built_in">string</span>;                   // 对 myString 赋值
-[<span class="built_in">string</span> appendStrin<span class="variable">g:</span>@<span class="string">" world!"</span>];           // 往 <span class="built_in">string</span> 追加文本 
-NSLog(@”%@”, <span class="built_in">string</span>);                           // 此处 <span class="built_in">string</span> 已经改变，输出为<span class="string">"hello world!"</span>
-NSLog(@”%@”, instance.myString);         // 输出 myString，你会发现此处输出仍然为 <span class="string">"hello"</span> 因为 myString 在 <span class="built_in">string</span> 改变之前已经 <span class="built_in">copy</span> 了一份副本
-UIView *<span class="keyword">view</span> = [[UIView alloc] init];
-NSLog(@”retainCount = %<span class="keyword">d</span>”, <span class="keyword">view</span>.retainCount);
-// 输出 <span class="keyword">view</span> 的引用计数，此时为 <span class="number">1</span>
-instance.myView = <span class="keyword">view</span>;      // 对 myView 属性赋值
-NSLog(@”retainCount = %<span class="keyword">d</span>”, <span class="keyword">view</span>.retainCount);
-// 再次输出 <span class="keyword">view</span> 的引用计数，此时为 <span class="number">2</span>，因为 myView 对 <span class="keyword">view</span> 进行了一次 retain。 
-[<span class="keyword">view</span> release];
-// 此处虽然 <span class="keyword">view</span> 被 release 释放掉了，但 myView 对 <span class="keyword">view</span> 进行了一次 retain，那么 myView 保留的 UIView 的对象指针仍然有效。
-[instance release] ;
-</code></pre>]]></content>
-    <summary type="html">
-    <![CDATA[<p>使用 @property 配合 @synthesize 可以让编译器自动实现 getter/setter 方法，使用的时候也很方便，可以直接使用 “对象.属性” 的方法调用；如果我们想要 “对象.方法” 的方式来调用一个方法并获取到方法的返回值，那就需要使用 @property 配合 @dynamic 了。  </p>
-<p>使用 @dynamic 关键字是告诉编译器由我们自己来实现访问方法。如果使用的是 @synthesize，那么这个工作编译器就会帮你实现了。  </p>
-<p>readonly 此标记说明属性是只读的，默认的标记是读写，如果你指定了只读，在 @implementation 中只需要一个读取器。或者如果你使用 @synthesize 关键字，也是有读取器方法被解析。而且如果你试图使用点操作符为属性赋值，你将得到一个编译错误。  </p>
-<p>readwrite 此标记说明属性会被当成读写的，这也是默认属性。设置器和读取器都需要在 @implementation 中实现。如果使用 @synthesize 关键字，读取器和设置器都会被解析。</p>
-<p>nonatomic：非原子性访问，对属性赋值的时候不加锁，多线程并发访问会提高性能。如果不加此属性，则默认是两个访问方法都为原子型事务访问。  </p>
-<p>atomic 和 nonatomic 用来决定编译器生成的 getter 和 setter 是否为原子操作。<br>]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://treylin.me/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
     <title><![CDATA[It's life.]]></title>
     <link href="https://treylin.me/2013/01/29/ni-xiang-yao-de-sheng-huo/"/>
     <id>https://treylin.me/2013/01/29/ni-xiang-yao-de-sheng-huo/</id>
     <published>2013-01-29T02:43:00.000Z</published>
-    <updated>2016-11-18T02:35:15.000Z</updated>
+    <updated>2016-11-22T16:35:32.000Z</updated>
     <content type="html"><![CDATA[<p>这阵子，生活中影响比较大的，有一个人和一件事。  </p>
-<p>####一个人，这个人，我不认识。  </p>
+<p>####一个人，这个人，我不认识</p>
 <p>周末习惯要出去走走，不会太晚起床，哪怕是比前天晚上预期的起床时间晚了半小时，也会感到懊恼，这不会是什么焦虑症的前兆吧。以前挺喜欢热闹的，哪人多往哪钻。后来心态变了，不喜欢人太多的地方。上个周末，找了家咖啡馆，勉强消费得起。带了电脑，一坐，就是一个美好的下午。靠着墙坐，是玻璃幕墙，外面的行人车辆一清二楚。<br><a id="more"></a> </p>
 <p><img src="https://ooo.0o0.ooo/2016/11/18/582e680f6a374.jpg" alt="street singer" title="Singer">  </p>
 <p>这个人，便是我在度过这个闲适的下午之后遇见的。他是一个卖唱的原创歌手，带着一把吉他，坐在树下。我这是第一次在街头看见卖唱的<code>原创</code>歌手。之前在街头看到卖唱的，大都是身有残疾，或者有什么家庭事故，遭遇了不幸的。他们在卖唱的时候，眉头一般都是紧缩的，一脸愁容，歌声在这个时候，只是他们用来博人同情的工具。而这个原创歌手很不一样。我路过的时候，他正在用不太标准的粤语唱着 Beyond 的《海阔天空》。摇著头，头发随着舞动，手在吉他前欢快的扫着，最重要的是，他的嘴角是上扬的，给我感觉是，他不是在卖唱，他是在享受音乐，路人也很享受，这是他的一场小型演唱会。听着听着，我竟然一身鸡皮疙瘩。下一首，他换了自己的一首原创歌曲，有句歌词大概有这样的一句：“人们买房买车买不断的欲望...” 歌词大意是在讽刺那些当今社会物欲横流的现象，以及描述他自己理想的生活。唱得比刚才那首还卖力。旁边一个二十来岁小姑娘很激动，眼里好像泛着泪光。曲毕，她走上前和歌手交谈，像之前熟悉的朋友。末了，小姑娘从钱包里掏出一百元，塞进了歌手手里。歌手没有太大推脱，他们相视，笑笑，歌手收下了钱，用一首《奔跑》，目送了小姑娘。他们估计以前都是歌手，是一个 band 的，又或者有其他情况，这个我不得而知，但是此情此景，每个热爱音乐，向往自由的人，都会动容吧。第一次觉得，街边卖唱是这么好听，我也是第一次掏出钱，给了街边卖唱的歌手。心里很受震撼，回去的路上，脑海里一直是歌手坐树下，轻抚琴弦的模样。我开始考虑自己的生活。  </p>
@@ -465,7 +338,7 @@ NSLog(@”retainCount = %<span class="keyword">d</span>”, <span class="keyword
 ]]></content>
     <summary type="html">
     <![CDATA[<p>这阵子，生活中影响比较大的，有一个人和一件事。  </p>
-<p>####一个人，这个人，我不认识。  </p>
+<p>####一个人，这个人，我不认识</p>
 <p>周末习惯要出去走走，不会太晚起床，哪怕是比前天晚上预期的起床时间晚了半小时，也会感到懊恼，这不会是什么焦虑症的前兆吧。以前挺喜欢热闹的，哪人多往哪钻。后来心态变了，不喜欢人太多的地方。上个周末，找了家咖啡馆，勉强消费得起。带了电脑，一坐，就是一个美好的下午。靠着墙坐，是玻璃幕墙，外面的行人车辆一清二楚。<br>]]>
     
     </summary>
@@ -494,126 +367,6 @@ NSLog(@”retainCount = %<span class="keyword">d</span>”, <span class="keyword
     </summary>
     
       <category term="Life" scheme="https://treylin.me/categories/Life/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[about self = [super init]]]></title>
-    <link href="https://treylin.me/2013/01/11/about-self-super-init/"/>
-    <id>https://treylin.me/2013/01/11/about-self-super-init/</id>
-    <published>2013-01-11T07:06:00.000Z</published>
-    <updated>2013-11-11T07:13:26.000Z</updated>
-    <content type="html"><![CDATA[<p>先看一下官方文档给出的初始化示例代码：</p>
-<pre><code>- (id)<span class="keyword">init</span> {  
-   <span class="keyword">self</span> = [<span class="keyword">super</span> <span class="keyword">init</span>];  <span class="comment">// Call a designated initializer here.  </span>
-   <span class="keyword">if</span> (<span class="keyword">self</span> != <span class="literal">nil</span>) {  
-         <span class="comment">// 省略其他细节  </span>
-   }  
-   <span class="keyword">return</span> <span class="keyword">self</span>;  
-}  
-</code></pre><p>容易让人困惑的地方在于，将父类初始化之后，将其返回的对象指针覆盖当前对象的指针。<br>这种方式令人费解，目前暂时找不到官方解释这么做的原因。<br><a id="more"></a></p>
-<p>官方文档 有解释。<br>我们先分以下几种情况分别分析：（假设superSelf是[super init]的返回值）</p>
-<pre><code>superSelf == <span class="literal">nil</span>
-</code></pre><p>此时父类初始化失败，self随之被赋值为nil并返回，表现正常。</p>
-<pre><code>superSelf == <span class="keyword">self</span>
-</code></pre><p>大部分类的初始化都是这个结果。此时赋值没有任何影响。 </p>
-<pre><code>superSelf != <span class="keyword">self</span>
-</code></pre><p>这种情况正是大部分人疑惑的地方。执行 self = [super init] 之后，我们创建的对象将会被重定向到另外一块内存上。接下来重点解释这种情况。</p>
-<p>首先，出现父类指针跟子类指针不一样的情况其实就是父类的init方法返回的对象跟原先创建的对象不一样，分为以下几种：<br>1 单件。<br>此时如果执行 self = [super init] 将使所有子类指向这个单件的内存。<br>这不仅使所有子类互相修改数据，甚至访问子类自己增加的变量的时候，可能会崩溃。<br>建议不要继承单件、或者保证单件的子类也是单件。<br>2 ClassClusters（类簇），初始化方法返回了不同的子类。<br>以下是对象初始化后，返回不同的子类的例子：</p>
-<pre><code><span class="built_in">NSString</span> *str1 = [<span class="built_in">NSString</span> alloc];  
-<span class="built_in">NSString</span> *str2 = [str1 initWithString:<span class="string">@"hello"</span>];  
-</code></pre><p>上面的str1和str2是不一样的对象，存在于不同的内存块中，在GNUStep里面，str1是GSPlaceholderString对象，str2是GSCInlineString对象。<br>3 共享。<br>先看例子：  </p>
-<pre><code>NSNumber *n1 = <span class="comment">[<span class="comment">[NSNumber alloc]</span> initWithInt:1]</span>;  
-NSNumber *n2 = <span class="comment">[<span class="comment">[NSNumber alloc]</span> initWithInt:1]</span>;  
-</code></pre><p>以上的n1和n2，指向了同一块内存！<br>由于NSNumber是创建之后就不能修改的对象，所以Foundation在这里做了一些优化，相同数值的NSNumber对象将共享同一块内存。<br>4 父类可能在初始化中释放了当前的对象并创建了新的内存区域。<br>这时，子类需要将self指向新的内存区域才能正常工作。所以一定要执行self = [super init];</p>
-<p>###总结：<br>在初始化方法中使用self = [super init]语句是Objective-C的标准做法。<br>一般情况下都要用以上语句来防止父类改变对象的内存地址导致self指针指向无效内存。<br>在父类是单件、类簇或者有共享资源的时候，必须依照实际情况考虑是否加上这行代码。<br>总之，当需要继承父类的时候，调用父类的init之前，必须知道父类的init方法的工作方式。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>先看一下官方文档给出的初始化示例代码：</p>
-<pre><code>- (id)<span class="keyword">init</span> {  
-   <span class="keyword">self</span> = [<span class="keyword">super</span> <span class="keyword">init</span>];  <span class="comment">// Call a designated initializer here.  </span>
-   <span class="keyword">if</span> (<span class="keyword">self</span> != <span class="literal">nil</span>) {  
-         <span class="comment">// 省略其他细节  </span>
-   }  
-   <span class="keyword">return</span> <span class="keyword">self</span>;  
-}  
-</code></pre><p>容易让人困惑的地方在于，将父类初始化之后，将其返回的对象指针覆盖当前对象的指针。<br>这种方式令人费解，目前暂时找不到官方解释这么做的原因。<br>]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://treylin.me/categories/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[iOS应用开发最佳实践系列一：编写高质量的Objective-C代码「转载」]]></title>
-    <link href="https://treylin.me/2012/12/20/iosying-yong-kai-fa-zui-jia-shi-jian-xi-lie-1-bian-xie-gao-zhi-liang-de-objective-cdai-ma-zhuan-zai/"/>
-    <id>https://treylin.me/2012/12/20/iosying-yong-kai-fa-zui-jia-shi-jian-xi-lie-1-bian-xie-gao-zhi-liang-de-objective-cdai-ma-zhuan-zai/</id>
-    <published>2012-12-20T06:47:00.000Z</published>
-    <updated>2013-11-11T07:14:15.000Z</updated>
-    <content type="html"><![CDATA[<p>「文章出处: <a href="http://www.cnblogs.com/xdream86/p/3309345.html」" target="_blank" rel="external">http://www.cnblogs.com/xdream86/p/3309345.html」</a>  </p>
-<p>###点标记语法</p>
-<p>属性和幂等方法（多次调用和一次调用返回的结果相同）使用点标记语法访问，其他的情况使用方括号标记语法。<br>良好的风格： </p>
-<pre><code>view.backgroundColor = <span class="string">[UIColor orangeColor]</span>;
-<span class="string">[UIApplication sharedApplication]</span>.delegate;
-</code></pre><p>不良的风格：</p>
-<pre><code><span class="attr_selector">[view setBackgroundColor:[UIColor orangeColor]</span>];
-<span class="tag">UIApplication</span><span class="class">.sharedApplication</span><span class="class">.delegate</span>;
-</code></pre><a id="more"></a>
-<p>###间距<br>二元运算符和参数之间需要放置一个空格，一元运算符、强制类型转换和参数之间不放置空格。关键字之后圆括号之前需要放置一个空格。  </p>
-<pre><code><span class="keyword">void</span> *ptr = &amp;value + <span class="number">10</span> * <span class="number">3</span>;    
-NewType a = (NewType)b;
-
-<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
-    doCoolThings();
-}
-</code></pre><p>数组和字典类型的字面值的方括号两边各放置一个空格。  </p>
-<pre><code>NSArray *theShit = <span class="constant">@[</span> <span class="constant">@1</span>, <span class="constant">@2</span>, <span class="constant">@3</span> ]<span class="comment">;</span>
-</code></pre><p>字典字面值的键和冒号之间没有空格，冒号和值之间有一个空格。  </p>
-<pre><code>NSDictionary <span class="keyword">*</span>keyedShit = <span class="comment">@{ GHDidCreateStyleGuide: @YES };</span>
-</code></pre><p>C函数声明中，左括号的前面不保留空格，并且函数名应该像类一样带有命名空间标识。<br>良好的风格：  </p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">RNCWesomeFunction</span><span class="params">(BOOL hasSomeArgs)</span></span>;  
-</code></pre><p>长的字面值应被拆分为多行。<br>良好的风格：  </p>
-<pre><code><span class="built_in">NSArray</span> *theShit = @[
-    <span class="string">@"Got some long string objects in here."</span>,
-    [AndSomeModelObjects too],
-    <span class="string">@"Moar strings."</span>
-];
-
-
-<span class="built_in">NSDictionary</span> *keyedShit = @{
-    <span class="string">@"this.key"</span>: <span class="string">@"corresponds to this value"</span>,
-    <span class="string">@"otherKey"</span>: <span class="string">@"remoteData.payload"</span>,
-    <span class="string">@"some"</span>: <span class="string">@"more"</span>,
-    <span class="string">@"JSON"</span>: <span class="string">@"keys"</span>,
-    <span class="string">@"and"</span>: <span class="string">@"stuff"</span>,
-};
-</code></pre><p>每一行代码使用4个空格缩进。不使用tab缩进。下图是在Xcode的Preferences进行缩进设置的截图。  </p>
-<p>方法签名以及其他关键字（if/else/switch/while等）后面跟随的左花括号总是和语句出现于同一行，而右花括号独占一行。<br>良好的风格：  </p>
-<pre><code><span class="keyword">if</span> (user.isHappy) {
-//<span class="keyword">Do</span> something
-}
-
-<span class="keyword">else</span> {
-//<span class="keyword">Do</span> something <span class="keyword">else</span>
-}
-</code></pre><p>如果一个方法内有多个功能区域，可以使用空行分隔功能区域。<br>每一行代码不要超过100个字符。<br>每一个方法之前都有一个99字符宽的注释行，注释行相对于使用空行更能提高代码的辨识度，当一行代码很长的时候，注释行也起到了越界检测的作用。注释行：<br>    //////////////////////////////////////////////////////////////////////////////////////////////////  </p>
-<p>###条件语句<br>所有的逻辑块必须使用花括号包围，即使条件体只需编写一行代码也必须使用花括号。<br>良好的风格做法：</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>「文章出处: <a href="http://www.cnblogs.com/xdream86/p/3309345.html」">http://www.cnblogs.com/xdream86/p/3309345.html」</a>  </p>
-<p>###点标记语法</p>
-<p>属性和幂等方法（多次调用和一次调用返回的结果相同）使用点标记语法访问，其他的情况使用方括号标记语法。<br>良好的风格： </p>
-<pre><code>view.backgroundColor = <span class="string">[UIColor orangeColor]</span>;
-<span class="string">[UIApplication sharedApplication]</span>.delegate;
-</code></pre><p>不良的风格：</p>
-<pre><code><span class="attr_selector">[view setBackgroundColor:[UIColor orangeColor]</span>];
-<span class="tag">UIApplication</span><span class="class">.sharedApplication</span><span class="class">.delegate</span>;
-</code></pre>]]>
-    
-    </summary>
-    
-      <category term="iOS" scheme="https://treylin.me/categories/iOS/"/>
     
   </entry>
   
