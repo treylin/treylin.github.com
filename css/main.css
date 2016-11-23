@@ -1152,7 +1152,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff39fa;
+  background: #feffa4;
 }
 .sidebar-nav {
   margin: 0;
@@ -2047,7 +2047,7 @@ ul li {
 }
 .site-meta .brand {
   padding: 2px 1px;
-  color: #222;
+  color: #666;
   background: none;
 }
 @media (max-width: 767px) {
