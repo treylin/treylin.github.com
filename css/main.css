@@ -1152,7 +1152,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff7ddf;
+  background: #ff39fa;
 }
 .sidebar-nav {
   margin: 0;
@@ -2073,6 +2073,7 @@ ul li {
   overflow: hidden;
   margin: 0 auto;
   width: 75%;
+  background: #666;
 }
 @media (max-width: 767px) {
   .logo-line-before,
