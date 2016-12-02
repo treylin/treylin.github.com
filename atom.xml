@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Life is short, play more.]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="https://treylin.me/"/>
-  <updated>2016-11-24T02:25:06.000Z</updated>
+  <updated>2016-12-02T02:51:30.000Z</updated>
   <id>https://treylin.me/</id>
   
   <author>
@@ -13,6 +13,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[关于标点、英文字母大小写、排版、用词]]></title>
+    <link href="https://treylin.me/2016/12/02/composing/"/>
+    <id>https://treylin.me/2016/12/02/composing/</id>
+    <published>2016-12-02T02:02:48.000Z</published>
+    <updated>2016-12-02T02:51:30.000Z</updated>
+    <content type="html"><![CDATA[<p>经常有人说你这是强迫症。<br>如果这也能被算作是强迫症的症状之一，那我觉得挺悲哀的。在我看来，正确的标点，正确的大小写，正确的排版，是一段文本的基本标准。  </p>
+<h1 id="中文标点与英文标点混用的情况">中文标点与英文标点混用的情况</h1><p>在一篇中文文章中，应该使用中文标点符号。文章里如果引用了英文语句，语句里应该使用英文标点。例如：<br><strong>正确</strong>：你好，十二月。<br><strong>错误</strong>：你好, 十二月.</p>
+<p><strong>正确</strong>：“Two things fill the mind with ever-increasing wonder and awe, the more often and the more intensely the mind of thought is drawn to them: the starry heavens above me and the moral law within me.”，或者「Two things fill the mind with ever-increasing wonder and awe, the more often and the more intensely the mind of thought is drawn to them: the starry heavens above me and the moral law within me.」。个人偏向使用直角引号。<br><strong>错误</strong>：“Two things fill the mind with ever-increasing wonder and awe，the more often and the more intensely the mind of thought is drawn to them：the starry heavens above me and the moral law within me。”。  </p>
+<h1 id="商品名或其他特殊名词">商品名或其他特殊名词</h1><p>官方给出的名字是如何，文章里提及时，就应该遵照官方写法。例如：</p>
+<ul>
+<li>MacBook Pro，不是 Macbook pro。</li>
+<li>豆瓣FM，不是豆瓣fm。（注意：这里中文和英文之间是没有空格的，遵照官方写法。）</li>
+<li>iOS，不是 ios，IOS。</li>
+<li>Android，不是 android。</li>
+<li>GitHub，不是 Github，github。</li>
+</ul>
+<p>再有，也是最容易被忽略的，同时也极大影响视觉和美感的一点：空格的使用。以下是常见的几点：</p>
+<ul>
+<li>中文与英文之间，需要加入一个半角空格。例如，这是我新买的 MacBook Pro。</li>
+<li>中文与数字之间，需要加入一个半角空格。例如，这是我的第 3 台 Mac。</li>
+<li>数字与单位之间，需要加入一个半角空格。例如，这台 MacBook Pro 的内存是 16 GB。  </li>
+</ul>
+<p>待续。</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>经常有人说你这是强迫症。<br>如果这也能被算作是强迫症的症状之一，那我觉得挺悲哀的。在我看来，正确的标点，正确的大小写，正确的排版，是一段文本的基本标准。  </p>
+<h1 id="中文标点与英文标点混用的情况">中文标点与英文标点混用的情况</h1><p>在一篇中文文]]>
+    </summary>
+    
+      <category term="composing" scheme="https://treylin.me/tags/composing/"/>
+    
+      <category term="layout" scheme="https://treylin.me/tags/layout/"/>
+    
+      <category term="type" scheme="https://treylin.me/tags/type/"/>
+    
+      <category term="writing" scheme="https://treylin.me/tags/writing/"/>
+    
+      <category term="写作" scheme="https://treylin.me/tags/%E5%86%99%E4%BD%9C/"/>
+    
+      <category term="排版" scheme="https://treylin.me/tags/%E6%8E%92%E7%89%88/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[助人与勇气]]></title>
