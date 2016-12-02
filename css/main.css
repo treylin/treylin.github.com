@@ -274,7 +274,7 @@ a:hover {
   border-bottom-color: #222;
 }
 ul {
-  list-style: none;
+  list-style: disc;
 }
 blockquote {
   margin: 0;
@@ -294,7 +294,7 @@ h6 {
   margin: 60px 0 15px;
 }
 ul {
-  list-style: square;
+  list-style: disc;
 }
 a {
   word-wrap: break-word;
@@ -1152,7 +1152,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #fff1ff;
+  background: #7d8e1c;
 }
 .sidebar-nav {
   margin: 0;
