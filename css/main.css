@@ -1152,7 +1152,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #01ff16;
+  background: #fff1ff;
 }
 .sidebar-nav {
   margin: 0;
@@ -2005,7 +2005,7 @@ hr {
   height: 2px;
 }
 ul li {
-  list-style: circle;
+  list-style: disc;
 }
 .btn {
   padding: 0 10px;
